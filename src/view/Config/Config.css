@@ -1,0 +1,22 @@
+.Config .ant-input-group-addon {
+  background-color: transparent;
+  color: #E4E4E4;
+  border: 0px solid #484E94;
+  border-bottom: 1px solid #484E94;
+}
+.Config input.ant-input {
+  background-color: transparent;
+  color: #E4E4E4;
+  border: 0px solid #484E94;
+  border-bottom: 1px solid #484E94;
+}
+.Config span {
+  color: #FFFFFF;
+}
+.Config .config_class_select span {
+  color: #0F0F0F;
+}
+.Config .ant-radio-wrapper span {
+  color: #FFFFFF;
+}
+/*# sourceMappingURL=Config.css.map */
