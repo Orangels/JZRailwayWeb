@@ -1,4 +1,5 @@
 import React from 'react'
+import {Row, Col} from 'antd'
 import {screen_scale_height, screen_scale_width} from "../view/parameter/parameters"
 import item_banner from '../asset/按钮3.png'
 import item_banner_current from '../asset/按钮2.png'
@@ -102,21 +103,22 @@ export default class TabBar extends React.Component {
           let { items, resolve } = this.props
           let { type } = this.props || 0
 
+          let itemLen = items.length
           items = items.map((value,index)=>{
               let current_style = index === this.state.current_page ? style.current_style[type] : {}
               return (
-                  <div style={{...style.item[type], ...current_style, width:this.props.style.width/items.length}}
+                  <Col span={24/itemLen} style={{...style.item[type], ...current_style}}
                        onClick={this._click.bind(this,index,resolve)}
                        key={`TabBarItem_${index}`}>
                       {value}
-                  </div>
+                  </Col>
               )
           });
 
           return (
-              <div style={{...style.wrapStyle[type], ...this.props.style}} >
+              <Row style={{...style.wrapStyle[type], ...this.props.style}} >
                   {items}
-              </div>
+              </Row>
           )
       }
 

@@ -53,150 +53,90 @@ let Ul_component = ({data, style})=> {
 
 let home_content_2_2_data = [
     {
+        country: "实时旅客人数",
         time: "8:00",
-        state_type: "进入人数",
-        // state: randomNum(5,10)
-        state: 0
+        // timeValue: 1593000000,
+        value: 5
     },
     {
+        country: "实时旅客人数",
+        time: "8:30",
+        // timeValue: 1593001800,
+        value: 6
+    },
+    {
+        country: "实时旅客人数",
+        time: "9:00",
+        // timeValue: 1593003600,
+        value: 8
+    },
+    {
+        country: "实时旅客人数",
+        time: "9:30",
+        // timeValue: 1593005400,
+        value: 5
+    },
+    {
+        country: "实时旅客人数",
+        time: "10:00",
+        // timeValue: 1593007200,
+        value: 4
+    },
+    {
+        country: "实时旅客人数",
+        time: "10:30",
+        // timeValue: 1593012600,
+        value: 3
+    },
+    {
+        country: "实时旅客人数",
+        time: "11:00",
+        // timeValue: 1592928000,
+        value: 9
+    },
+    {
+        country: "历史平均旅客人数",
         time: "8:00",
-        state_type: "离开人数",
-        // state: randomNum(0,8)
-        state: 0
+        // timeValue: 1593000000,
+        value: 1
     },
     {
-        time: "8:00",
-        state_type: "陌生人数",
-        // state: randomNum(1,5)
-        state: 0
-    },
-    {
-        time: "8:05",
-        state_type: "进入人数",
-        // state: randomNum(5,10)
-        state: 0
-    },
-    {
-        time: "8:05",
-        state_type: "离开人数",
-        // state: randomNum(0,8)
-        state: 0
-    },
-    {
-        time: "8:05",
-        state_type: "陌生人数",
-        // state: randomNum(1,5)
-        state: 0
-    },
-    {
-        time: "8:10",
-        state_type: "进入人数",
-        // state: randomNum(5,10)
-        state: 0
-    },
-    {
-        time: "8:10",
-        state_type: "离开人数",
-        // state: randomNum(0,8)
-        state: 0
-    },
-    {
-        time: "8:10",
-        state_type: "陌生人数",
-        // state: randomNum(1,5)
-        state: 0
-    },
-    {
-        time: "8:15",
-        state_type: "进入人数",
-        // state: randomNum(5,10)
-        state: 0
-    },
-    {
-        time: "8:15",
-        state_type: "离开人数",
-        // state: randomNum(0,8)
-        state: 0
-    },
-    {
-        time: "8:15",
-        state_type: "陌生人数",
-        // state: randomNum(1,5)
-        state: 0
-    },
-    {
-        time: "8:20",
-        state_type: "进入人数",
-        // state: randomNum(5,10)
-        state: 0
-    },
-    {
-        time: "8:20",
-        state_type: "离开人数",
-        // state: randomNum(0,8)
-        state: 0
-    },
-    {
-        time: "8:20",
-        state_type: "陌生人数",
-        // state: randomNum(1,5)
-        state: 0
-    },
-    {
-        time: "8:25",
-        state_type: "进入人数",
-        // state: randomNum(5,10)
-        state: 0
-    },
-    {
-        time: "8:25",
-        state_type: "离开人数",
-        // state: randomNum(0,8)
-        state: 0
-    },
-    {
-        time: "8:25",
-        state_type: "陌生人数",
-        // state: randomNum(1,5)
-        state: 0
-    },
-    {
+        country: "历史平均旅客人数",
         time: "8:30",
-        state_type: "进入人数",
-        // state: randomNum(5,10)
-        state: 0
+        // timeValue: 1593001800,
+        value: 1
     },
     {
-        time: "8:30",
-        state_type: "离开人数",
-        // state: randomNum(0,8)
-        state: 0
+        country: "历史平均旅客人数",
+        time: "9:00",
+        // timeValue: 1593003600,
+        value: 1
     },
     {
-        time: "8:30",
-        state_type: "陌生人数",
-        // state: randomNum(1,5)
-        state: 0
+        country: "历史平均旅客人数",
+        time: "9:30",
+        // timeValue: 1593005400,
+        value: 1
     },
     {
-        time: "8:35",
-        state_type: "进入人数",
-        // state: randomNum(5,10)
-        state: 0
+        country: "历史平均旅客人数",
+        time: "10:00",
+        // timeValue: 1593007200,
+        value: 2
     },
     {
-        time: "8:35",
-        state_type: "离开人数",
-        // state: randomNum(0,8)
-        state: 0
+        country: "历史平均旅客人数",
+        time: "10:30",
+        // timeValue: 1593012600,
+        value: 7
     },
     {
-        time: "8:35",
-        state_type: "陌生人数",
-        // state: randomNum(1,5)
-        state: 0
+        country: "历史平均旅客人数",
+        time: "11:00",
+        // timeValue: 1592928000,
+        value: 1
     },
-]
+];
 
 export default class Home_content_2_2 extends React.Component {
     constructor(props) {
@@ -216,8 +156,8 @@ export default class Home_content_2_2 extends React.Component {
     }
 
     componentWillReceiveProps(nextProps, nextContext) {
-        let {data} = nextProps || home_content_2_2_data
-
+        let data = nextProps.data || home_content_2_2_data
+        console.log(data)
         this.setState({
             data:data
         })
@@ -227,12 +167,13 @@ export default class Home_content_2_2 extends React.Component {
         let component_text = this.state.state_props
         return (
             <Home_content_template style={{
-                width:810*screen_scale_width,
+                // width:810*screen_scale_width,
                 height:358 * screen_scale_height,
+                width:'100%',
                 marginTop: 10*screen_scale_width,
                 background: `url(${backgroundBanner}) no-repeat `,
                 backgroundSize:'100% 100%',
-            }} title={this.props.data['title'] || "出入人员统计"}>
+            }} title={"实时候车旅客人数"}>
                 <div style={{
                     // background:`url(${backgroundBanner}) no-repeat `,
                     // backgroundSize: '100% 100%',
@@ -251,12 +192,16 @@ export default class Home_content_2_2 extends React.Component {
                     {/*<Single_Histogram  title={'进出人员统计'}*/}
                     {/*            height={330*screen_scale_height}*/}
                     {/*            width={800*screen_scale_width}/>*/}
-                    <Chart_custom  title={''}
-                        // height={276*screen_scale_width}
-                                   dataSource={this.state.data}
-                                   height={330*screen_scale_height}
-                                   width={800*screen_scale_width}/>
-
+                    {/*<Chart_custom  title={''}*/}
+                    {/*    // height={276*screen_scale_width}*/}
+                    {/*               dataSource={this.state.data}*/}
+                    {/*               height={330*screen_scale_height}*/}
+                    {/*               width={800*screen_scale_width}/>*/}
+                    <Chart_area
+                        height={330*screen_scale_height}
+                        width={800*screen_scale_width}
+                        dataSource={this.state.data}
+                    />
                 </div>
             </Home_content_template>
         )

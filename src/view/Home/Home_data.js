@@ -1,6 +1,8 @@
+import {randomNum} from "../../common/utils";
+
 export let Home_data = {
     class_statistical:{
-        title:'枪机综合数据',
+        title:'设备概览',
         text_content:[
             ['布控位置', '大厅门 1'],
             ['进入人数', 10],
@@ -9,7 +11,7 @@ export let Home_data = {
             ['陌生人',  1],
         ],
         // tabValue:['枪机 1','枪机 2','枪机 3','枪机 4', '枪机 5',],
-        tabValue:['枪机 1',],
+        tabValue:['枪机 0','枪机 1','枪机 2'],
         interactive_state:48,
         focus_state: 49,
         active_state:56,
@@ -92,3 +94,228 @@ export let Home_data = {
         [233,'2408h',87,90]],
     ]
 }
+
+export let home_content_2_1_data = [
+    {
+        time: "8:00",
+        state_type: "区域 1",
+        state: 0
+    },
+    // {
+    //     time: "8:00",
+    //     state_type: "区域 2",
+    //     state: 0
+    // },
+    {
+        time: "8:05",
+        state_type: "区域 1",
+        state: 0
+    },
+    // {
+    //     time: "8:05",
+    //     state_type: "区域 2",
+    //     state: 0
+    // },
+    {
+        time: "8:10",
+        state_type: "区域 1",
+        state: 0
+    },
+    // {
+    //     time: "8:10",
+    //     state_type: "区域 2",
+    //     state: 0
+    // },
+    {
+        time: "8:15",
+        state_type: "区域 1",
+        state: 0
+    },
+    // {
+    //     time: "8:15",
+    //     state_type: "区域 2",
+    //     state: 0
+    // },
+    {
+        time: "8:20",
+        state_type: "区域 1",
+        state: 0
+    },
+    // {
+    //     time: "8:20",
+    //     state_type: "区域 2",
+    //     state: 0
+    // },
+    {
+        time: "8:25",
+        state_type: "区域 1",
+        state: 0
+    },
+    // {
+    //     time: "8:25",
+    //     state_type: "区域 2",
+    //     state: 0
+    // },
+    {
+        time: "8:30",
+        state_type: "区域 1",
+        state: 0
+    },
+    // {
+    //     time: "8:30",
+    //     state_type: "区域 2",
+    //     state: 0
+    // },
+]
+
+export let home_content_2_1_pie_data = [
+    {
+        item: "0-10s",
+        count: 0
+    },
+    {
+        item: "10-20s",
+        count: 0
+    },
+    {
+        item: "20-30s",
+        count: 0
+    },
+    {
+        item: ">30s",
+        count: 0
+    },
+];
+
+export let home_content_1_3_data = [
+    {
+        time: "8:00",
+        state_type: "进入人数",
+        state: 0
+        // state: 0
+    },
+    {
+        time: "8:05",
+        state_type: "进入人数",
+        state: 0
+        // state: 0
+    },
+    {
+        time: "8:10",
+        state_type: "进入人数",
+        state: 0
+        // state: 0
+    },
+    {
+        time: "8:15",
+        state_type: "进入人数",
+        state: 0
+        // state: 0
+    },
+    {
+        time: "8:20",
+        state_type: "进入人数",
+        state: 0
+        // state: 0
+    },
+    {
+        time: "8:25",
+        state_type: "进入人数",
+        state: 0
+        // state: 0
+    },
+    {
+        time: "8:30",
+        state_type: "进入人数",
+        state: 0
+        // state: 0
+    },
+]
+export let home_content_2_2_data = [
+    {
+        country: "实时旅客人数",
+        time: "8:00",
+        // timeValue: 1593000000,
+        value: 0
+    },
+    {
+        country: "实时旅客人数",
+        time: "8:30",
+        // timeValue: 1593001800,
+        value: 0
+    },
+    {
+        country: "实时旅客人数",
+        time: "9:00",
+        // timeValue: 1593003600,
+        value: 0
+    },
+    {
+        country: "实时旅客人数",
+        time: "9:30",
+        // timeValue: 1593005400,
+        value: 0
+    },
+    {
+        country: "实时旅客人数",
+        time: "10:00",
+        // timeValue: 1593007200,
+        value: 0
+    },
+    {
+        country: "实时旅客人数",
+        time: "10:30",
+        // timeValue: 1593012600,
+        value: 0
+    },
+    {
+        country: "实时旅客人数",
+        time: "11:00",
+        // timeValue: 1592928000,
+        value: 0
+    },
+    {
+        country: "历史平均旅客人数",
+        time: "8:00",
+        // timeValue: 1593000000,
+        value: 100
+    },
+    {
+        country: "历史平均旅客人数",
+        time: "8:30",
+        // timeValue: 1593001800,
+        value: 98
+    },
+    {
+        country: "历史平均旅客人数",
+        time: "9:00",
+        // timeValue: 1593003600,
+        value: 110
+    },
+    {
+        country: "历史平均旅客人数",
+        time: "9:30",
+        // timeValue: 1593005400,
+        value: 130
+    },
+    {
+        country: "历史平均旅客人数",
+        time: "10:00",
+        // timeValue: 1593007200,
+        value: 120
+    },
+    {
+        country: "历史平均旅客人数",
+        time: "10:30",
+        // timeValue: 1593012600,
+        value: 135
+    },
+    {
+        country: "历史平均旅客人数",
+        time: "11:00",
+        // timeValue: 1592928000,
+        value: 125
+    },
+];
+
+export let home_content_2_1_pie_data_interval = 10 * 8

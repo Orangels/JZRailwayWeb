@@ -99,4 +99,5 @@ export const state_data = {
     // keys:["兴趣度","活跃度","互动率"]
 };
 
-export const chart_color = ['#2584E3', '#36AA5E', '#DAB43A', '#27ABB1']
+// export const chart_color = ['#2584E3', '#36AA5E', '#DAB43A', '#27ABB1']
+export const chart_color = ['#36AA5E', '#DAB43A', '#27ABB1', '#2584E3']

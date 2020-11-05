@@ -21,8 +21,9 @@ const content_1_height = 600
 const warning_img_height = 150
 const img_col = 5
 const img_width = 250
-const fish_video_width = 35
-const perimeter_video_width = fish_video_width * 1.5
+const fish_video_width = 48
+// const perimeter_video_width = fish_video_width * 1.5
+const perimeter_video_width = 48
 
 const styles = {
     content:{
@@ -94,8 +95,8 @@ class Student_analyze extends React.Component {
             disk_used:'0G',
             memory_percent:0,
             disk_percent:0,
-            show_cam_0: false,
-            show_cam_1: false,
+            show_cam_0: true,
+            show_cam_1: true,
         };
 
         this._ws_new_state = this._ws_new_state.bind(this)
@@ -197,9 +198,6 @@ class Student_analyze extends React.Component {
     }
 
     componentDidMount() {
-        console.log(11111)
-        console.log(screen_scale_width)
-        console.log(11111)
 
         let url_socket = `${url}/Camera_Web_ws`
 
@@ -208,11 +206,11 @@ class Student_analyze extends React.Component {
         // this.socket_cam = io(url_socket)
         // this.socket_cam.on('new_state',this._ws_new_state)
         this.start_time = new Date().getTime()
-        this.timer = setInterval(this._update_track_data, 10000);
+        // this.timer = setInterval(this._update_track_data, 10000);
         // this.socket_cam.on('new_person_state',this._ws_new_person_state);
 
-        let show_cam_0 = localStorage.getItem("show_cam_0") || false
-        let show_cam_1 = localStorage.getItem("show_cam_1") || false
+        let show_cam_0 = localStorage.getItem("show_cam_0") || true
+        let show_cam_1 = localStorage.getItem("show_cam_1") || true
         this.setState({
             show_cam_0,
             show_cam_1
@@ -223,12 +221,12 @@ class Student_analyze extends React.Component {
                 preload:     true, //预加载
                 fluid:       true, //播放器将具有流畅的大小。换句话说，它将扩展以适应其容器
                 techOrder:   ['flash'],//Video.js技术首选的顺序
-                aspectRatio: '1:1',//将播放器置于流体模式，在计算播放器的动态大小时使用。由冒号（"16:9"或"4:3"）分隔的两个数字
+                aspectRatio: '16:9',//将播放器置于流体模式，在计算播放器的动态大小时使用。由冒号（"16:9"或"4:3"）分隔的两个数字
                 flash: { swf: videoSWF },
                 live: true,
                 sources: [{
                     type: "rtmp/flv",
-                    src: "rtmp://192.168.88.221:1935/hls/000",
+                    src: "rtmp://192.168.88.197:1935/hls/000",
                 }],
             }
 
@@ -238,12 +236,12 @@ class Student_analyze extends React.Component {
                 preload:     true, //预加载
                 fluid:       true, //播放器将具有流畅的大小。换句话说，它将扩展以适应其容器
                 techOrder:   ['flash'],//Video.js技术首选的顺序
-                aspectRatio: '3:2',//将播放器置于流体模式，在计算播放器的动态大小时使用。由冒号（"16:9"或"4:3"）分隔的两个数字
+                aspectRatio: '16:9',//将播放器置于流体模式，在计算播放器的动态大小时使用。由冒号（"16:9"或"4:3"）分隔的两个数字
                 flash: { swf: videoSWF },
                 live: true,
                 sources: [{
                     type: "rtmp/flv",
-                    src: "rtmp://192.168.88.221:1935/hls/002",
+                    src: "rtmp://192.168.88.197:1935/hls/001",
                 }],
             }
 
@@ -253,12 +251,12 @@ class Student_analyze extends React.Component {
                 preload:     true, //预加载
                 fluid:       true, //播放器将具有流畅的大小。换句话说，它将扩展以适应其容器
                 techOrder:   ['flash'],//Video.js技术首选的顺序
-                aspectRatio: '1:1',//将播放器置于流体模式，在计算播放器的动态大小时使用。由冒号（"16:9"或"4:3"）分隔的两个数字
+                aspectRatio: '16:9',//将播放器置于流体模式，在计算播放器的动态大小时使用。由冒号（"16:9"或"4:3"）分隔的两个数字
                 flash: { swf: videoSWF },
                 live: true,
                 sources: [{
                     type: "rtmp/flv",
-                    src: "rtmp://192.168.88.221:1935/hls/001",
+                    src: "rtmp://192.168.88.197:1935/hls/002",
                 }],
             }
 
@@ -268,7 +266,7 @@ class Student_analyze extends React.Component {
                 preload:     true, //预加载
                 fluid:       true, //播放器将具有流畅的大小。换句话说，它将扩展以适应其容器
                 techOrder:   ['flash'],//Video.js技术首选的顺序
-                aspectRatio: '3:2',//将播放器置于流体模式，在计算播放器的动态大小时使用。由冒号（"16:9"或"4:3"）分隔的两个数字
+                aspectRatio: '16:9',//将播放器置于流体模式，在计算播放器的动态大小时使用。由冒号（"16:9"或"4:3"）分隔的两个数字
                 flash: { swf: videoSWF },
                 live: true,
                 sources: [{
@@ -587,9 +585,9 @@ class Student_analyze extends React.Component {
                       style={{...{flexDirection:'column',}, ...style_tmp}}
                       new_state={this._ws_new_state}
             >
-                <Button type="primary" style={{marginLeft:10, position:'absolute', top:20*screen_scale_height, right:25}} onClick={this.showModal}>
-                    添加设备
-                </Button>
+                {/*<Button type="primary" style={{marginLeft:10, position:'absolute', top:20*screen_scale_height, right:25}} onClick={this.showModal}>*/}
+                {/*    添加设备*/}
+                {/*</Button>*/}
                 <div className="Mode_1" style={styles.wrap_div}>
                     <Modal
                         title="设备地址"
@@ -616,19 +614,22 @@ class Student_analyze extends React.Component {
                             </FormItem>
                         </Form>
                     </Modal>
-                    <Row gutter={0}>
-                        <Col span={18}
+                    <Row gutter={0} >
+                        <Col span={23}
                              className={'ls_content_div'}
-                             style={{paddingLeft:10, display:"flex",
+                             style={{
+                                 // paddingLeft:10,
+                                 margin:"0px 20px",
+                                 display:"flex",
                                  flexDirection:"column",
                              }}
                         >
                             {
-                                this.state.show_cam_0 ?  <div style={{paddingLeft:10, width:"100%", position:"relative", marginTop:10, display:'flex',}} >
+                                this.state.show_cam_0 ? <div style={{paddingLeft:10, width:"100%", position:"relative", marginTop:10, display:'flex', justifyContent:'space-between'}} >
                                     <div style={{width: `${fish_video_width}%`, position: "relative", marginRight: "2%",}}>
-                                        <Tag color={'#FA0F21'} style={{position: 'absolute', top: 10, right: 10, zIndex: 99}}
+                                        <Tag color={'#FA0F21'} style={{position: 'absolute', top: 10, left: 10, zIndex: 99}}
                                              closable>
-                                            {`鱼眼 0`}
+                                            {`枪机 0`}
                                         </Tag>
                                         <video id={`example_video_0`} className="video-js vjs-default-skin video_0" preload="auto"
                                                autoPlay="autoplay"
@@ -646,10 +647,10 @@ class Student_analyze extends React.Component {
                                             <source src="rtmp://192.168.88.221:1935/hls/room" type="rtmp/flv"/>
                                         </video>
                                     </div>
-                                    <div style={{width: `${perimeter_video_width}%`, position: "relative"}}>
-                                        <Tag color={'#FA0F21'} style={{position: 'absolute', top: 10, right: 10, zIndex: 99}}
+                                    <div style={{width: `${perimeter_video_width}%`, position: "relative", }}>
+                                        <Tag color={'#FA0F21'} style={{position: 'absolute', top: 10, left: 10, zIndex: 99}}
                                              closable>
-                                            {`鱼眼 0 展开`}
+                                            {`枪机 1`}
                                         </Tag>
                                         <video id={`example_video_1`} className="video-js vjs-custom-skin video_0" preload="auto"
                                                autoPlay="autoplay" data-setup=''
@@ -668,11 +669,11 @@ class Student_analyze extends React.Component {
                                 </div> : null
                             }
                             {
-                                this.state.show_cam_1 ? <div style={{paddingLeft:10, width:"100%", position:"relative", marginTop:10, display:'flex',}} >
+                                this.state.show_cam_1 ? <div style={{paddingLeft:10, width:"100%", position:"relative", marginTop:10, display:'flex', justifyContent:'space-between'}} >
                                     <div style={{width: `${fish_video_width}%`, position: "relative", marginRight: "2%"}}>
-                                        <Tag color={'#FA0F21'} style={{position: 'absolute', top: 10, right: 10, zIndex: 99}}
+                                        <Tag color={'#FA0F21'} style={{position: 'absolute', top: 10, left: 10, zIndex: 99}}
                                              closable>
-                                            {`鱼眼 1`}
+                                            {`枪机 2`}
                                         </Tag>
                                         <video id={`example_video_2`} className="video-js vjs-default-skin video_0" preload="auto"
                                                autoPlay="autoplay"
@@ -690,10 +691,10 @@ class Student_analyze extends React.Component {
                                             <source src="rtmp://192.168.88.221:1935/hls/room" type="rtmp/flv"/>
                                         </video>
                                     </div>
-                                    <div style={{width: `${perimeter_video_width}%`, position: "relative"}}>
-                                        <Tag color={'#FA0F21'} style={{position: 'absolute', top: 10, right: 10, zIndex: 99}}
+                                    <div style={{width: `${perimeter_video_width}%`, position: "relative", zIndex:-1}}>
+                                        <Tag color={'#FA0F21'} style={{position: 'absolute', top: 10, left: 10, zIndex: -1}}
                                              closable>
-                                            {`鱼眼 1 展开`}
+                                            {`枪机 3`}
                                         </Tag>
                                         <video id={`example_video_3`} className="video-js vjs-custom-skin video_0" preload="auto"
                                                autoPlay="autoplay" data-setup=''
@@ -712,18 +713,6 @@ class Student_analyze extends React.Component {
                                 </div> : null
                             }
                         </Col>
-                        {/*<Col span={6} >*/}
-                        {/*    <Row gutter={16}>*/}
-                        {/*        {this.waring_img_history(this.state.persons, 3)}*/}
-                        {/*    </Row>*/}
-                        {/*</Col>*/}
-                        <div style={{width: 400 / 0.75 * screen_scale_width, position:'absolute', right:66.67 * screen_scale_width, height:700,
-                            marginTop:10,border:"solid 2px #0DEEFF", borderRadius:5
-                        }} className={'imgWall'}>
-                            <Row gutter={16}>
-                                {this.waring_img_history(this.state.persons, 3)}
-                            </Row>
-                        </div>
                     </Row>
                 </div>
             </Template>

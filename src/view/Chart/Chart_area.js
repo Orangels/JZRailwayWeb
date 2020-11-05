@@ -159,7 +159,7 @@ const cols = {
     },
     value:{
         // min:20,
-        max:10,
+        // max:10,
         alias:'实时状态',
         // tickCount:5,
     }
@@ -193,9 +193,18 @@ export default class Chart_area extends React.Component {
         this.timer && clearInterval(this.timer)
     }
 
+    componentDidMount() {
+        let dataSource = this.props.dataSource || data_ori
+        this.setState({
+            data:dataSource
+        },()=>{
+
+        })
+    }
 
     componentWillReceiveProps(nextProps, nextContext) {
         let data = nextProps.dataSource || data_ori
+        console.log(nextProps.dataSource)
         let onGetG2Instance = nextProps.onGetG2Instance
         this.setState({
             data:data,
@@ -221,7 +230,7 @@ export default class Chart_area extends React.Component {
               <div style={{...{display:"flex",flexDirection:"column", paddingRight:50*screen_scale_width,
                       // paddingTop:20*screen_scale_width,
                   }, ...this.props.style}}>
-                  <Chart scale={cols} width={width} height={height} data={data_ori} autoFit>
+                  <Chart scale={cols} width={width} height={height} data={this.state.data} autoFit>
                       <Axis name="time"
                             label={{
                                 offset:10,

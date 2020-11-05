@@ -16,6 +16,7 @@ class AppStore {
 
     @observable entruUser = []
 
+    @observable homeVideoShowNum = 0
 
     @action updateEntryPersons(vPersons){
         this.entryPersons = vPersons
@@ -43,6 +44,10 @@ class AppStore {
 
     @action updateTrackerTimestamp(vTimestamp){
         this.trackerTimestamp = vTimestamp
+    }
+
+    @action updateHomeVideoShowNum(vNum){
+        this.homeVideoShowNum = vNum
     }
 
     @action initUsers() {

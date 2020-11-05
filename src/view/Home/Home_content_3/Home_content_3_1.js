@@ -2,10 +2,14 @@ import React from 'react'
 import {screen_scale_height, screen_scale_width} from "../../parameter/parameters";
 import {show_2_ste} from '../../../common/utils'
 import Home_content_template from "../../../common/Home_content_template";
-import { Progress } from 'antd';
+import WaterWave from "../../../common/component/WaterWave"
+import { Progress, Row, Col } from 'antd';
 import backgroundBanner from "../../../asset/back_new/2_校园综合数据.png";
 import Chart_circle from "../../Chart/Chart_circle";
 import {chart_color} from "../../Chart/chart_config";
+import Chart_custom from "../../Chart/Chart_custom";
+import {randomNum} from "../../../common/utils"
+
 
 const progress_width = 130
 
@@ -13,7 +17,8 @@ const style = {
     wrapStyle:{
         background: `url(${backgroundBanner}) no-repeat `,
         backgroundSize: '100% 100%',
-        width:499*screen_scale_width,
+        // width:499*screen_scale_width,
+        width:'100%',
         height:578 * screen_scale_height,
         // height:577 * screen_scale_height,
         // display:'flex',
@@ -40,147 +45,137 @@ const style = {
     },
 }
 
+let home_content_2_2_data = [
+    {
+        time: "8:00",
+        state_type: "进入人数",
+        state: randomNum(5,10)
+        // state: 0
+    },
+    {
+        time: "8:05",
+        state_type: "进入人数",
+        state: randomNum(5,10)
+        // state: 0
+    },
+    {
+        time: "8:10",
+        state_type: "进入人数",
+        state: randomNum(5,10)
+        // state: 0
+    },
+    {
+        time: "8:15",
+        state_type: "进入人数",
+        state: randomNum(5,10)
+        // state: 0
+    },
+    {
+        time: "8:20",
+        state_type: "进入人数",
+        state: randomNum(5,10)
+        // state: 0
+    },
+    {
+        time: "8:25",
+        state_type: "进入人数",
+        state: randomNum(5,10)
+        // state: 0
+    },
+    {
+        time: "8:30",
+        state_type: "进入人数",
+        state: randomNum(5,10)
+        // state: 0
+    },
+]
+
 export default class Home_content_3_1 extends React.Component {
     constructor(props) {
         super(props);
+        this.state = {
+            data: home_content_2_2_data,
+            totalNum:0
+        }
+    }
 
+    componentDidMount() {
+        let {data} = this.props || home_content_2_2_data
+        let totalNum = this.props.totalNum || 0
+        this.setState({
+            data:data,
+            totalNum: totalNum
+        })
+
+        console.log("init pir timer")
+        // this.timer = setInterval(this._update_pieData, 1000*10);
+    }
+
+    componentWillReceiveProps(nextProps, nextContext) {
+        let {data} = nextProps || home_content_2_2_data
+        let totalNum = nextProps.totalNum || 0
+        this.setState({
+            data:data,
+            totalNum: totalNum
+        })
     }
 
     render() {
-
         return (
 
                 <Home_content_template style={{...style.wrapStyle,
                     // width:88*5*screen_scale_width
-                }} title={'房间区域驻留状态'}
+                }} title={'旅客出入站统计'}
                                        childStyle={style.childWrap}
                                        childName={'progress_ls'}
                 >
-                    <div style={style.progress}>
-                        <div style={{display:'flex', flexDirection:'column', alignItems:'center'}}>
-                            <Progress type="circle" percent={62} format={percent => `${show_2_ste(percent/100 * 24)} 小时`}
-                                      strokeColor={{
-                                          // '0%':'#08D6E2',
-                                          // '100%':'#51ECDA'
-                                          '0%': '#108ee9',
-                                          '100%': '#87d068',
-                                      }}
-                                      width={progress_width*screen_scale_width}
-                            />
-                            <span style={style.progress_title}>
-                                区域1驻留时长
-                            </span>
-                        </div>
-                        <div style={{display:'flex', flexDirection:'column', alignItems:'center', }}>
-                            <Progress type="circle" percent={51} format={percent => `${show_2_ste(percent/100 * 24)} 小时`}
-                                      strokeColor={{
-                                          '0%':'#08D6E2',
-                                          '100%':'#51ECDA'
-                                      }}
-                                      width={progress_width*screen_scale_width}/>
-                            <span style={style.progress_title}>
-                                    区域2驻留时长
-                                </span>
-                        </div>
-                        <div style={{display:'flex', flexDirection:'column', alignItems:'center', }}>
-                            <Progress type="circle" percent={48} format={percent => `${show_2_ste(percent/100 * 24)} 小时`}
-                                      strokeColor={{
-                                          '0%':'#08D6E2',
-                                          '100%':'#51ECDA'
-                                      }}
-                                      width={progress_width*screen_scale_width}/>
-                            <span style={style.progress_title}>
-                                区域3驻留时长
-                            </span>
-                        </div>
-                    </div>
-                    <div>
-                        <div style={{
-                            display:'flex',
-                            flexDirection:'row',
-                            justifyContent:"space-around",
-                            height:350*screen_scale_height,
+                   <Row type="flex" justify="space-around" align="middle">
+                       <Col span={12} style={
+                           {display:'flex', flexDirection:'column', justifyContent: 'center', alignItems:'center' ,
+                               color:'white', fontSize: 24
+                           }
+                       }>
+                           <Row>
+                               今日进站
+                           </Row>
+                           <Row>
+                               旅客人数
+                           </Row>
+                       </Col>
+                       <Col span={12} style={{display:'flex', flexDirection:'column', justifyContent: 'center', alignItems:'center'}}>
+                           <WaterWave type="circle" width={150} height={150}
+                                      showText={`${this.state.totalNum}`}
+                                      showText_1={``}
+                                      rangeValue={95} />
+                       </Col>
+                   </Row>
+                    <Row>
+                        <Col span={24} style={{
+                            // background:`url(${backgroundBanner}) no-repeat `,
+                            // backgroundSize: '100% 100%',
                             width:'100%',
-                            position:"relative",
-                            // background:'red'
+                            height:'100%',
+                            flexWrap:'wrap',
+                            flexDirection: 'row',
+                            marginTop:10*screen_scale_height
                         }}>
-                            <Chart_circle height={350*screen_scale_height}
-                                          width={350*screen_scale_width}
-                                          title={''}
-                                          // colors = {chart_color}
-                                // data={this.state.Pie_data}
-                                          style={{
-                                              overflow:'hidden',
-                                              position:'absolute',
-                                              left:-60
-                                          }}
-                                          isPie={true}
-                            />
-                            <span style={{
-                                overflow:'hidden',
-                                position:'absolute',
-                                left:25,
-                                bottom:35,
-                                fontSize:12,
-                                color:'#FFFFFF',
-                            }}>
-                              区域 1 人数统计
-                            </span>
-                            <Chart_circle height={350*screen_scale_height}
-                                          width={350*screen_scale_width}
-                                          title={''}
-                                // colors = {chart_color}
-                                // data={this.state.Pie_data}
-                                          style={{
-                                              overflow:'hidden',
-                                              position:'absolute',
-                                              left:65
-                                          }}
-                                          isPie={true}
-                            />
-                            <span style={{
-                                overflow:'hidden',
-                                position:'absolute',
-                                left:150,
-                                bottom:35,
-                                fontSize:12,
-                                color:'#FFFFFF',
-                            }}>
-                              区域 2 人数统计
-                            </span>
-                            <Chart_circle height={350*screen_scale_height}
-                                          width={350*screen_scale_width}
-                                          title={''}
-                                          // colors={chart_color.slice(-2)}
-                                          data={[
-                                              {
-                                                  count: 3,
-                                                  item: '进入',
-                                              },
-                                              {
-                                                  count: 1,
-                                                  item: '离开',
-                                              },
-                                          ]}
-                                          style={{
-                                              overflow:'hidden',
-                                              position:'absolute',
-                                              right:-75
-                                          }}
-                                          isPie={true}
-                            />
-                            <span style={{
-                                overflow:'hidden',
-                                position:'absolute',
-                                right:20,
-                                bottom:35,
-                                fontSize:12,
-                                color:'#FFFFFF',
-                            }}>
-                              区域 3 人数统计
-                            </span>
-                        </div>
-                    </div>
+                            {/*<Ul_component data={component_text}/>*/}
+                            {/*<Chart_area  height={330*screen_scale_height}*/}
+                            {/*             width={800*screen_scale_width}/>*/}
+                            {/*<Histogram  title={'进出人员统计'}*/}
+                            {/*            height={330*screen_scale_height}*/}
+                            {/*            width={800*screen_scale_width}/>*/}
+                            {/*<Single_Histogram  title={'进出人员统计'}*/}
+                            {/*            height={330*screen_scale_height}*/}
+                            {/*            width={800*screen_scale_width}/>*/}
+                            <Chart_custom  title={''}
+                                // height={276*screen_scale_width}
+                                           dataSource={this.state.data}
+                                           height={330*screen_scale_height}
+                                           width={800*screen_scale_width}/>
+
+                        </Col>
+                    </Row>
                 </Home_content_template>
         )
 

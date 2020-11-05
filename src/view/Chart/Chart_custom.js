@@ -149,7 +149,7 @@ const cols = {
     },
     state:{
         // min:20,
-        max:10,
+        // max:10,
         alias:'实时状态',
         // tickCount:5,
     }
@@ -264,6 +264,7 @@ export default class Chart_custom extends React.Component{
 
         let height = this.props.height || 400
         let width = this.props.width || 'auto'
+        let title = this.props.title || ""
         let Real_time = this.props.real_time || false
 
         let cols_real_time = {
@@ -281,12 +282,14 @@ export default class Chart_custom extends React.Component{
         let show_cols = Real_time ? cols_real_time : cols
 
         return (
-            <div style={{...{display:"flex",flexDirection:"column", paddingRight:50*screen_scale_width,
+            <div style={{...{display:"flex",flexDirection:"column",
+                    // paddingRight:50*screen_scale_width,
                     paddingTop:10*screen_scale_width,
+                    position:'relative'
                 }, ...this.props.style}}>
-                {/*<h3 style={{marginTop:20,marginLeft:20, paddingLeft:10,borderLeft:'2px solid #52B3E1'}}>*/}
-                {/*    {this.props.title}*/}
-                {/*</h3>*/}
+                <div className={"pie_title"} style={{position:"absolute", top:5, left: "40%", color:'white'}}>
+                    {title}
+                </div>
                 <Chart
                         className={'lineCharts'}
                         height={height} data={this.state.data} scale={show_cols} forceFit

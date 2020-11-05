@@ -1,4 +1,5 @@
 import React from 'react'
+import {Row, Col} from 'antd'
 import {toJS} from 'mobx'
 import io from 'socket.io-client'
 import Template from '../../common/composite_template'
@@ -13,170 +14,231 @@ import Home_content_3_3 from './Home_content_3/Home_content_3_3'
 
 import Home_content_2_1_canvas from './Home_content_2/Home_content_2_1_canvas'
 
-import {screen_scale_width, screen_scale_height, url} from "../parameter/parameters";
-import {Home_data} from './Home_data'
+import {screen_scale_width, screen_scale_height} from "../parameter/parameters";
+import {Home_data, home_content_1_3_data, home_content_2_1_data, home_content_2_2_data, home_content_2_1_pie_data, home_content_2_1_pie_data_interval} from './Home_data'
 import Home_content_template from "../../common/Home_content_template";
 import Chart_custom from "../Chart/Chart_custom";
 import Histogram from '../Chart/Histogram'
 import {randomNum, _fetch, deepCopy} from "../../common/utils";
+import {url, CAMERAPERSONS} from "../../common/urls"
 import {inject, observer} from "mobx-react";
+import './Home.less'
 
 const style = {
     content:{
         marginTop:96*screen_scale_width,
         marginLeft:30*screen_scale_width,
+        marginRight:30*screen_scale_width,
         display:'flex',
-        flexDirection:'column',
-        overflowY:'hidden'
+        // flexDirection:'column',
+        flexDirection:'row',
+        justifyContent:'space-between'
+        // overflowY:'hidden'
     },
 }
 
-let home_content_2_2_data = [
-    {
-        time: "8:00",
-        state_type: "进入人数",
-        // state: randomNum(5,10)
-        state: 0
-    },
-    {
-        time: "8:00",
-        state_type: "离开人数",
-        // state: randomNum(0,8)
-        state: 0
-    },
-    {
-        time: "8:00",
-        state_type: "陌生人数",
-        // state: randomNum(1,5)
-        state: 0
-    },
-    {
-        time: "8:05",
-        state_type: "进入人数",
-        // state: randomNum(5,10)
-        state: 0
-    },
-    {
-        time: "8:05",
-        state_type: "离开人数",
-        // state: randomNum(0,8)
-        state: 0
-    },
-    {
-        time: "8:05",
-        state_type: "陌生人数",
-        // state: randomNum(1,5)
-        state: 0
-    },
-    {
-        time: "8:10",
-        state_type: "进入人数",
-        // state: randomNum(5,10)
-        state: 0
-    },
-    {
-        time: "8:10",
-        state_type: "离开人数",
-        // state: randomNum(0,8)
-        state: 0
-    },
-    {
-        time: "8:10",
-        state_type: "陌生人数",
-        // state: randomNum(1,5)
-        state: 0
-    },
-    {
-        time: "8:15",
-        state_type: "进入人数",
-        // state: randomNum(5,10)
-        state: 0
-    },
-    {
-        time: "8:15",
-        state_type: "离开人数",
-        // state: randomNum(0,8)
-        state: 0
-    },
-    {
-        time: "8:15",
-        state_type: "陌生人数",
-        // state: randomNum(1,5)
-        state: 0
-    },
-    {
-        time: "8:20",
-        state_type: "进入人数",
-        // state: randomNum(5,10)
-        state: 0
-    },
-    {
-        time: "8:20",
-        state_type: "离开人数",
-        // state: randomNum(0,8)
-        state: 0
-    },
-    {
-        time: "8:20",
-        state_type: "陌生人数",
-        // state: randomNum(1,5)
-        state: 0
-    },
-    {
-        time: "8:25",
-        state_type: "进入人数",
-        // state: randomNum(5,10)
-        state: 0
-    },
-    {
-        time: "8:25",
-        state_type: "离开人数",
-        // state: randomNum(0,8)
-        state: 0
-    },
-    {
-        time: "8:25",
-        state_type: "陌生人数",
-        // state: randomNum(1,5)
-        state: 0
-    },
-    {
-        time: "8:30",
-        state_type: "进入人数",
-        // state: randomNum(5,10)
-        state: 0
-    },
-    {
-        time: "8:30",
-        state_type: "离开人数",
-        // state: randomNum(0,8)
-        state: 0
-    },
-    {
-        time: "8:30",
-        state_type: "陌生人数",
-        // state: randomNum(1,5)
-        state: 0
-    },
-    {
-        time: "8:35",
-        state_type: "进入人数",
-        // state: randomNum(5,10)
-        state: 0
-    },
-    {
-        time: "8:35",
-        state_type: "离开人数",
-        // state: randomNum(0,8)
-        state: 0
-    },
-    {
-        time: "8:35",
-        state_type: "陌生人数",
-        // state: randomNum(1,5)
-        state: 0
-    },
-]
+// let home_content_2_1_data = [
+//     {
+//         time: "8:00",
+//         state_type: "区域 1",
+//         state: randomNum(5,10)
+//     },
+//     // {
+//     //     time: "8:00",
+//     //     state_type: "区域 2",
+//     //     state: randomNum(5,10)
+//     // },
+//     {
+//         time: "8:05",
+//         state_type: "区域 1",
+//         state: randomNum(5,10)
+//     },
+//     // {
+//     //     time: "8:05",
+//     //     state_type: "区域 2",
+//     //     state: randomNum(5,10)
+//     // },
+//     {
+//         time: "8:10",
+//         state_type: "区域 1",
+//         state: randomNum(5,10)
+//     },
+//     // {
+//     //     time: "8:10",
+//     //     state_type: "区域 2",
+//     //     state: randomNum(5,10)
+//     // },
+//     {
+//         time: "8:15",
+//         state_type: "区域 1",
+//         state: randomNum(5,10)
+//     },
+//     // {
+//     //     time: "8:15",
+//     //     state_type: "区域 2",
+//     //     state: randomNum(5,10)
+//     // },
+//     {
+//         time: "8:20",
+//         state_type: "区域 1",
+//         state: randomNum(5,10)
+//     },
+//     // {
+//     //     time: "8:20",
+//     //     state_type: "区域 2",
+//     //     state: randomNum(5,10)
+//     // },
+//     {
+//         time: "8:25",
+//         state_type: "区域 1",
+//         state: randomNum(5,10)
+//     },
+//     // {
+//     //     time: "8:25",
+//     //     state_type: "区域 2",
+//     //     state: randomNum(5,10)
+//     // },
+//     {
+//         time: "8:30",
+//         state_type: "区域 1",
+//         state: randomNum(5,10)
+//     },
+//     // {
+//     //     time: "8:30",
+//     //     state_type: "区域 2",
+//     //     state: randomNum(5,10)
+//     // },
+// ]
+// let home_content_1_3_data = [
+//     {
+//         time: "8:00",
+//         state_type: "进入人数",
+//         state: randomNum(5,10)
+//         // state: 0
+//     },
+//     {
+//         time: "8:05",
+//         state_type: "进入人数",
+//         state: randomNum(5,10)
+//         // state: 0
+//     },
+//     {
+//         time: "8:10",
+//         state_type: "进入人数",
+//         state: randomNum(5,10)
+//         // state: 0
+//     },
+//     {
+//         time: "8:15",
+//         state_type: "进入人数",
+//         state: randomNum(5,10)
+//         // state: 0
+//     },
+//     {
+//         time: "8:20",
+//         state_type: "进入人数",
+//         state: randomNum(5,10)
+//         // state: 0
+//     },
+//     {
+//         time: "8:25",
+//         state_type: "进入人数",
+//         state: randomNum(5,10)
+//         // state: 0
+//     },
+//     {
+//         time: "8:30",
+//         state_type: "进入人数",
+//         state: randomNum(5,10)
+//         // state: 0
+//     },
+// ]
+// let home_content_2_2_data = [
+//     {
+//         country: "实时旅客人数",
+//         time: "8:00",
+//         // timeValue: 1593000000,
+//         value: 5
+//     },
+//     {
+//         country: "实时旅客人数",
+//         time: "8:30",
+//         // timeValue: 1593001800,
+//         value: 6
+//     },
+//     {
+//         country: "实时旅客人数",
+//         time: "9:00",
+//         // timeValue: 1593003600,
+//         value: 8
+//     },
+//     {
+//         country: "实时旅客人数",
+//         time: "9:30",
+//         // timeValue: 1593005400,
+//         value: 5
+//     },
+//     {
+//         country: "实时旅客人数",
+//         time: "10:00",
+//         // timeValue: 1593007200,
+//         value: 4
+//     },
+//     {
+//         country: "实时旅客人数",
+//         time: "10:30",
+//         // timeValue: 1593012600,
+//         value: 3
+//     },
+//     {
+//         country: "实时旅客人数",
+//         time: "11:00",
+//         // timeValue: 1592928000,
+//         value: 9
+//     },
+//     {
+//         country: "历史平均旅客人数",
+//         time: "8:00",
+//         // timeValue: 1593000000,
+//         value: 1
+//     },
+//     {
+//         country: "历史平均旅客人数",
+//         time: "8:30",
+//         // timeValue: 1593001800,
+//         value: 1
+//     },
+//     {
+//         country: "历史平均旅客人数",
+//         time: "9:00",
+//         // timeValue: 1593003600,
+//         value: 1
+//     },
+//     {
+//         country: "历史平均旅客人数",
+//         time: "9:30",
+//         // timeValue: 1593005400,
+//         value: 1
+//     },
+//     {
+//         country: "历史平均旅客人数",
+//         time: "10:00",
+//         // timeValue: 1593007200,
+//         value: 2
+//     },
+//     {
+//         country: "历史平均旅客人数",
+//         time: "10:30",
+//         // timeValue: 1593012600,
+//         value: 7
+//     },
+//     {
+//         country: "历史平均旅客人数",
+//         time: "11:00",
+//         // timeValue: 1592928000,
+//         value: 1
+//     },
+// ];
 
 @inject('appStore') @observer
 class Home extends React.Component {
@@ -218,42 +280,81 @@ class Home extends React.Component {
                     },
                 ],
             },
+            home_content_2_1_data: home_content_2_1_data,
+            home_content_2_1_pie_data: home_content_2_1_pie_data,
             home_content_2_2_data: home_content_2_2_data,
-            home_content_2_2_update_index:0
+            home_content_1_3_data: home_content_1_3_data,
+            home_content_2_2_update_index:0,
+            total_result: {
+                entry: 0,
+                heatmap: 0,
+                hesitate: 0
+            }
         };
         // this._updata_data = this._updata_data.bind(this)
           this._ws_new_coor = this._ws_new_coor.bind(this)
           this._ws_new_state = this._ws_new_state.bind(this)
           this._update_home_content_2_data = this._update_home_content_2_data.bind(this)
           this.mapClick = this.mapClick.bind(this)
+          this._update_home_content_1_btn_data = this._update_home_content_1_btn_data.bind(this)
       }
 
     _update_home_content_2_data(){
           let index = this.state.home_content_2_2_update_index
-           index = index % (home_content_2_2_data.length)
-          let entry_persons = this.state.home_circle_data.entry[0].count;
-          let exit_persons = this.state.home_circle_data.entry[1].count;
-          let register_persons = this.state.home_circle_data.register[1].count;
+           index = index % (home_content_2_1_data.length)
 
-          let home_content_2_2_updateData = deepCopy(this.state.home_content_2_2_data)
+        _fetch(CAMERAPERSONS, {}, (json)=>{
+            if (json.code == 200){
+                console.log(json.result)
+                let result = json.result
+                let entryData = deepCopy(this.state.home_content_1_3_data)
+                let hesitateData = deepCopy(this.state.home_content_2_1_data)
+                let heatMapData = deepCopy(this.state.home_content_2_2_data)
+                let home_content_2_1_pie_data_tmp = deepCopy(home_content_2_1_pie_data)
+                entryData[index].state = result.entry
+                hesitateData[index].state = result.hesitate
+                heatMapData[index].value = result.heatmap
 
-            home_content_2_2_updateData[index].state = entry_persons;
-            home_content_2_2_updateData[index+1].state = exit_persons;
-            home_content_2_2_updateData[index+2].state = register_persons;
+                let hes_total_times = result.hes_total_times
 
-        index += 3
-        this.setState({
-            home_content_2_2_data:home_content_2_2_updateData,
-            home_content_2_2_update_index: index
-        },()=>{
-            // console.log(this.state.home_content_2_2_data)
-            // console.log(this.state.home_content_2_2_update_index)
+                console.log(hes_total_times)
+
+                for (let i = 0; i < hes_total_times.length; i++){
+                    if (hes_total_times[i] < home_content_2_1_pie_data_interval){
+                        home_content_2_1_pie_data_tmp[0].count += 1
+                    }else if(hes_total_times[i] < home_content_2_1_pie_data_interval * 2){
+                        home_content_2_1_pie_data_tmp[1].count += 1
+                    }else if(hes_total_times[i] < home_content_2_1_pie_data_interval * 3){
+                        home_content_2_1_pie_data_tmp[2].count += 1
+                    }else {
+                        home_content_2_1_pie_data_tmp[3].count += 1
+                    }
+                }
+
+                console.log(home_content_2_1_pie_data_tmp)
+
+                index += 1
+                this.setState({
+                    home_content_2_1_data: hesitateData,
+                    home_content_2_2_data: heatMapData,
+                    home_content_1_3_data: entryData,
+                    home_content_2_1_pie_data: home_content_2_1_pie_data_tmp,
+                    home_content_2_2_update_index:index,
+                    total_result: deepCopy(result)
+                })
+            }else {
+
+            }
         })
 
+    }
 
-
-
-
+    _update_home_content_1_btn_data(){
+        this.setState({
+            current_page: (this.state.current_page + 1) % 3
+        },()=>{
+            this.props.appStore.updateHomeVideoShowNum(this.state.current_page)
+        })
     }
 
     _ws_new_state(data) {
@@ -329,11 +430,13 @@ class Home extends React.Component {
         // this.socket = io(url_socket)
         // this.socket.on('new_coor',this._ws_new_coor)
         this._ws_new_state()
-        this.timer = setInterval(this._update_home_content_2_data, 2000);
+        this.timer_0 = setInterval(this._update_home_content_2_data, 1000*3);
+        this.timer_1 = setInterval(this._update_home_content_1_btn_data, 1000*60);
     }
 
     componentWillUnmount() {
-        this.timer && clearInterval(this.timer)
+        this.timer_0 && clearInterval(this.timer_0)
+        this.timer_1 && clearInterval(this.timer_1)
         // this.socket.disconnect()
         // this.socket.emit('disconnect')
         // console.log('clear home_1_2 timer')
@@ -357,35 +460,50 @@ class Home extends React.Component {
         let class_statistical_data = Object.assign({},this.state.class_statistical, data_tmp)
         this.setState({
             class_statistical:class_statistical_data,
-            current_page: e % 5
+            current_page: e % 3
+        },()=>{
+            this.props.appStore.updateHomeVideoShowNum(this.state.current_page)
         })
     }
 
     render() {
           return (
               <Template classTag={'Home'} current_page={0} history={this.props.history}
-                        style={{height:1080*screen_scale_height}}
+                        style={{height:1080*screen_scale_height, display:'flex',
+                            flexDirection:'column', overflowY:'hidden', overflowX:'hidden',
+                        }}
                         new_coor={this._ws_new_coor}
                         new_state={this._ws_new_state}
                         ref="totalWrapComponent"
               >
-                  <div style={style.content} className={'Home_content_1'}>
-                      <Home_content_1_1 data={this.state.class_statistical}
-                                        home_circle_data={this.state.home_circle_data}
-                                        click={this.mapClick}
-                                        current_page={this.state.current_page}/>
-                      <Home_content_1_2 data={Home_data['device_states']}/>
-                  </div>
-                  <div style={style.content} className={'Home_content_2'}>
-                      {/*<Home_content_2_1 click={this.mapClick} />*/}
-                      <Home_content_2_1_canvas ref="canvasComponent"/>
-                      <Home_content_2_2 data={this.state.home_content_2_2_data}/>
-                  </div>
-                  <div style={style.content} className={'Home_content_3'}>
-                      <Home_content_3_1 />
-                      {/*<Home_content_3_2 />*/}
-                      <Home_content_3_3 />
-                  </div>
+                  <Row gutter={5} style={style.content} className={'Home_content_1'}>
+                      <Col span={5}>
+                          <Home_content_1_1 data={this.state.class_statistical}
+                                            home_circle_data={this.state.home_circle_data}
+                                            click={this.mapClick}
+                                            current_page={this.state.current_page}/>
+                      </Col>
+                      <Col span={13}>
+                          <Home_content_1_2 ref="canvasComponent"/>
+                      </Col>
+                      <Col span={6}>
+                          <Home_content_3_1 data={this.state.home_content_1_3_data} totalNum={this.state.total_result.entry}/>
+                      </Col>
+                  </Row>
+                  <Row gutter={12}
+                      style={{...style.content, marginTop:0, marginLeft:20*screen_scale_width,
+                          marginRight:20*screen_scale_width
+                      }} className={'Home_content_2'}
+                  >
+                      <Col span={12} >
+                          <Home_content_2_1 data={this.state.home_content_2_1_data}
+                                            pieData={this.state.home_content_2_1_pie_data}/>
+                      </Col>
+                      <Col span={12}>
+                          <Home_content_2_2 data={this.state.home_content_2_2_data}
+                                            />
+                      </Col>
+                  </Row>
               </Template>
           )
       }

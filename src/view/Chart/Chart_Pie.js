@@ -53,8 +53,8 @@ export default class Chart_Pie extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
-            // data:data,
-            data: [],
+            data:data,
+            // data: [],
             onGetG2Instance: null
         }
 
@@ -84,7 +84,7 @@ export default class Chart_Pie extends React.Component {
     }
 
     componentWillReceiveProps(nextProps, nextContext) {
-        let data = nextProps.data
+        let data = nextProps.data || data
         let onGetG2Instance = nextProps.onGetG2Instance
         this.setState({
             data: data,
@@ -96,6 +96,8 @@ export default class Chart_Pie extends React.Component {
         let onGetG2Instance = this.props.onGetG2Instance || null
         onGetG2Instance = onGetG2Instance || this.state.onGetG2Instance
 
+        console.log(this.state.data)
+
         this.dv = new DataView();
         this.dv.source(this.state.data).transform({
             type: "percent",
@@ -106,26 +108,36 @@ export default class Chart_Pie extends React.Component {
 
         let height = this.props.height || 250
         let width = this.props.width || 'auto'
+        let title = this.props.title || ""
         // console.log(width)
         // console.log(height)
         let Real_time = this.props.real_time || false
 
+        let labelOffset = 25
+
         return (
-            <div style={{
+            <div className={'home_content_2_1_pie'}
+                style={{
                 ...{
                     display: "flex",
                     flexDirection: "column",
                     background: 'clear',
-                    borderRadius: 4
+                    borderRadius: 4,
+                    position:'relative',
                 }, ...this.props.style
             }}>
+                <div className={"pie_title"} style={{position:"absolute", top:5, left: "30%", color:'white'}}>
+                    {title}
+                </div>
                 <Chart
                     height={height}
                     data={this.dv}
                     scale={cols}
                     // padding={[80, 100, 80, 80]}
+                    padding={[60, 75, 80, 60]}
                     forceFit
                     onGetG2Instance={onGetG2Instance}
+                    width={width}
                 >
                     <Coord type={"theta"} radius={0.75} innerRadius={0.6}/>
                     <Axis name="percent"/>
@@ -155,12 +167,33 @@ export default class Chart_Pie extends React.Component {
                             stroke: "#fff"
                         }}
                     >
-                        <Label
-                            content="percent"
-                            formatter={(val, item) => {
-                                return item.point.item + ": " + val;
-                            }}
+                        <Label content="item"
+                               textStyle={{
+                                   // textAlign: 'center',
+                                   fill: '#FFFFFF',
+                                   // textBaseline:'middle'
+                               }}
+                               // labelLine={{
+                               //     lineWidth: 1,// 线的粗细
+                               //     offset:20
+                               // }}
+                               formatter={(a, b) => {
+                                   // console.log(b)
+                                   return `${b.point.count}人`
+                               }}
+                               // offset={labelOffset}
                         />
+                        {/*<Label*/}
+                        {/*    content="percent"*/}
+                        {/*    textStyle={{*/}
+                        {/*        textAlign: 'center',*/}
+                        {/*        fill: '#FFFFFF',*/}
+                        {/*        // textBaseline:'middle'*/}
+                        {/*    }}*/}
+                        {/*    formatter={(val, item) => {*/}
+                        {/*        return item.point.item + ": " + val;*/}
+                        {/*    }}*/}
+                        {/*/>*/}
                     </Geom>
                 </Chart>
             </div>

@@ -9,6 +9,7 @@ class WaterWave extends Component {
       rangeValue:0,
       showText:'',
       showText_1:'',
+      testSize:null
     };
     this.isDrawContainer = false;
     this.draw = this.draw.bind(this);
@@ -16,14 +17,16 @@ class WaterWave extends Component {
 
 
 componentWillReceiveProps(nextProps, nextContext) {
-  let { rangeValue, showText, showText_1 } = nextProps
+  let { rangeValue, showText, showText_1, testSize } = nextProps
   rangeValue = rangeValue || 0
   showText = showText || `${this.nowRange}h`
   showText_1 = showText_1 || ''
+  testSize = testSize || null
   this.setState({
     rangeValue,
     showText,
-    showText_1
+    showText_1,
+    testSize
   })
 }
 
@@ -222,8 +225,8 @@ drawText(ctx){
   const r = this.radius;
   const cR = r;
 
-  // const size = 0.4*cR;
-  const size = 0.22*cR;
+  const size = this.state.testSize || 0.4*cR;
+  // const size = 0.22*cR;
 
   ctx.font = size + 'px Microsoft Yahei';
 

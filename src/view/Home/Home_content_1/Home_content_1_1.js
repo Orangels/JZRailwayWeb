@@ -1,4 +1,5 @@
 import React from 'react'
+import {Row, Col} from 'antd'
 import TabBar from '../../../common/TabBar'
 import Roulette_head from '../Roulette_head'
 import Home_content_template from '../../../common/Home_content_template'
@@ -9,13 +10,15 @@ import backgroundBanner from "../../../asset/back_new/2_校园综合数据.png";
 import {screen_scale_height, screen_scale_width} from "../../parameter/parameters";
 import ShowText from '../../../common/component/ShowText'
 import Chart_Pie from "../../Chart/Chart_Pie";
+import WaterWave from "../../../common/component/WaterWave";
 
 
 const style = {
     wrapStyle:{
         background: `url(${backgroundBanner}) no-repeat `,
         backgroundSize: '100% 100%',
-        width:499*screen_scale_width,
+        // width:499*screen_scale_width,
+        width:'100%',
         height:578 * screen_scale_height,
         // height:577 * screen_scale_height,
     },
@@ -48,6 +51,7 @@ export default class Home_content_1_1 extends React.Component {
             active_state:0,
             current_page:0,
             stranger:0,
+            camera_location:["大厅1东北角", "大厅2西南角", "大厅3东北角",],
             home_circle_data:{
                 entry:[
                     {
@@ -81,7 +85,7 @@ export default class Home_content_1_1 extends React.Component {
             // interactive_state:interactive_state,
             // focus_state: focus_state,
             // active_state:active_state,
-            // current_page:current_page,
+            current_page:current_page,
             // stranger: text_content[text_content.length-1][1],
             home_circle_data
         }, ()=>{
@@ -98,7 +102,7 @@ export default class Home_content_1_1 extends React.Component {
             // interactive_state:interactive_state,
             // focus_state: focus_state,
             // active_state:active_state,
-            // current_page:current_page,
+            current_page:current_page,
             // stranger: text_content[text_content.length-1][1],
             home_circle_data
         }, ()=>{
@@ -124,51 +128,44 @@ export default class Home_content_1_1 extends React.Component {
                 // width:88*5*screen_scale_width
             }}
                                    title={this.props.data.title}>
-                <div style={{
-                    display:'flex',
-                    flexDirection:'row',
-                    justifyContent:"space-around",
-                    height:400*screen_scale_height,
-                    width:400*screen_scale_width,
-                    position:"relative"
+                <Row type="flex" justify="space-around" align="middle" style={{marginTop:40*screen_scale_width,
+                    color:'white', fontSize: 24*screen_scale_width
                 }}>
-                    <Chart_circle height={400*screen_scale_height}
-                                  width={400*screen_scale_width}
-                                  title={''}
-                                  colors = {chart_color}
-                                  data={this.state.home_circle_data.entry}
-                                  style={{
-                                      overflow:'hidden',
-                                      position:'absolute',
-                                      left:-60
-                                  }}/>
-                    <Chart_circle height={400*screen_scale_height}
-                                  width={400*screen_scale_width}
-                                  title={''}
-                                  colors={['#27ABB1', '#DAB43A']}
-                                  data={this.state.home_circle_data.register}
-                                  // data={[
-                                  //     {
-                                  //         count: 3,
-                                  //         item: '已注册',
-                                  //     },
-                                  //     {
-                                  //         count: 1,
-                                  //         item: '未注册',
-                                  //     },
-                                  // ]}
-                                  style={{
-                                      overflow:'hidden',
-                                      position:'absolute',
-                                      right:-100
-                                  }}/>
+                    <Col >
+                        布控位置:
+                    </Col>
+                    <Col >
+                        {this.state.camera_location[this.state.current_page]}
+                    </Col>
+                </Row>
+                <div style={{ display:'flex', alignItems:'center', width:'100%',
+                    // marginTop:62*screen_scale_width-7*screen_scale_width*4,
+                    marginTop:40*screen_scale_height,
+                    position:'relative',
+                    justifyContent:"center"
+                    // backgroundColor:'red'
+                }}>
+                    {/*<Roulette_head style={{*/}
+                    {/*    // marginLeft:118*screen_scale_width*/}
+                    {/*}}/>*/}
+                    <WaterWave type="circle" width={150} height={150}
+                               showText={`运行时长`}
+                               showText_1={`150小时`}
+                               rangeValue={75}
+                               testSize={20}/>
+
                 </div>
                 <TabBar items={Home_data['class_statistical']['tabValue']} resolve={this.props.click} type={0}
-                        style={{width:88*5*screen_scale_width,
+                        style={{
+                            position:'absolute',
+                            // width:88*5*screen_scale_width,
+                            width:'90%',
                             // height:44*screen_scale_width,
                             height:44*screen_scale_height,
                             // marginTop:38*screen_scale_width
-                            marginTop:38*screen_scale_height
+                            bottom:80*screen_scale_width,
+                            left:"5%"
+
                         }}
                 current_page={this.state.current_page}/>
             </Home_content_template>

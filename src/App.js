@@ -11,6 +11,7 @@ import Home from './view/Home/Home'
 import Student_analyze from './view/Student_analyze/Student_analyze'
 import Class_analyze from './view/Class_analyze/Class_analyze'
 import Teacher_analyze from './view/Teacher_analyze/Teacher_analyze'
+import DrawLayer from './view/DrawLayer/index'
 import Config from './view/Config/Config'
 import Test from './Test'
 import TestView from './view/TestView/TestView'
@@ -41,6 +42,11 @@ const routes = [
     path:'/real_time_show',
     component:Student_analyze,
   },
+    {
+        path:'/draw',
+        component:DrawLayer
+
+    },
   { path: '/config',
     component: Config,
   },

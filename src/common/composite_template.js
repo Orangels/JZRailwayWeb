@@ -88,7 +88,7 @@ const style = {
     }
 }
 
-const navgation_btn = ['首页', '实时显示', '系统配置']
+const navgation_btn = ['首页', '实时显示', '区域配置', '系统配置']
 
 @inject('appStore') @observer
 class Template extends React.Component{
@@ -124,6 +124,9 @@ class Template extends React.Component{
                 link='/real_time_show'
                 break
             case 2:
+                link='/draw'
+                break
+            case 3:
                 link='/config'
                 break
             default:
@@ -251,228 +254,228 @@ class Template extends React.Component{
     }
 
     componentDidMount() {
-        (function() {
+        // (function() {
+        //
+        //     var width, height, largeHeader, canvas, ctx, points, target, animateHeader = true;
+        //
+        //     // Main
+        //     initHeader();
+        //     initAnimation();
+        //     addListeners();
+        //
+        //     function initHeader() {
+        //         width = window.innerWidth;
+        //         height = window.innerHeight;
+        //         target = {x: width/2, y: height/2};
+        //
+        //         largeHeader = document.getElementById('large-header');
+        //         // largeHeader.style.height = height+'px';
+        //
+        //         canvas = document.getElementById('demo-canvas');
+        //         canvas.width = width;
+        //         canvas.height = height;
+        //         ctx = canvas.getContext('2d');
+        //
+        //         // create points
+        //         points = [];
+        //         for(var x = 0; x < width; x = x + width/20) {
+        //             for(var y = 0; y < height; y = y + height/20) {
+        //                 var px = x + Math.random()*width/20;
+        //                 var py = y + Math.random()*height/20;
+        //                 var p = {x: px, originX: px, y: py, originY: py };
+        //                 points.push(p);
+        //             }
+        //         }
+        //
+        //         // for each point find the 5 closest points
+        //         for(var i = 0; i < points.length; i++) {
+        //             var closest = [];
+        //             var p1 = points[i];
+        //             for(var j = 0; j < points.length; j++) {
+        //                 var p2 = points[j]
+        //                 if(!(p1 == p2)) {
+        //                     var placed = false;
+        //                     for(var k = 0; k < 5; k++) {
+        //                         if(!placed) {
+        //                             if(closest[k] == undefined) {
+        //                                 closest[k] = p2;
+        //                                 placed = true;
+        //                             }
+        //                         }
+        //                     }
+        //
+        //                     for(var k = 0; k < 5; k++) {
+        //                         if(!placed) {
+        //                             if(getDistance(p1, p2) < getDistance(p1, closest[k])) {
+        //                                 closest[k] = p2;
+        //                                 placed = true;
+        //                             }
+        //                         }
+        //                     }
+        //                 }
+        //             }
+        //             p1.closest = closest;
+        //         }
+        //
+        //         // assign a circle to each point
+        //         for(var i in points) {
+        //             var c = new Circle(points[i], 2+Math.random()*2, 'rgba(255,255,255,0.3)');
+        //             points[i].circle = c;
+        //         }
+        //     }
+        //
+        //     // Event handling
+        //     function addListeners() {
+        //         if(!('ontouchstart' in window)) {
+        //             window.addEventListener('mousemove', mouseMove);
+        //         }
+        //         window.addEventListener('scroll', scrollCheck);
+        //         window.addEventListener('resize', resize);
+        //     }
+        //
+        //     function mouseMove(e) {
+        //         var posx = 0;
+        //         var posy = 0
+        //         if (e.pageX || e.pageY) {
+        //             posx = e.pageX;
+        //             posy = e.pageY;
+        //         }
+        //         else if (e.clientX || e.clientY)    {
+        //             posx = e.clientX + document.body.scrollLeft + document.documentElement.scrollLeft;
+        //             posy = e.clientY + document.body.scrollTop + document.documentElement.scrollTop;
+        //         }
+        //         target.x = posx;
+        //         target.y = posy;
+        //     }
+        //
+        //     function scrollCheck() {
+        //         if(document.body.scrollTop > height) animateHeader = false;
+        //         else animateHeader = true;
+        //     }
+        //
+        //     function resize() {
+        //         width = window.innerWidth;
+        //         height = window.innerHeight;
+        //         largeHeader.style.height = height+'px';
+        //         canvas.width = width;
+        //         canvas.height = height;
+        //     }
+        //
+        //     // animation
+        //     function initAnimation() {
+        //         animate();
+        //         for(var i in points) {
+        //             shiftPoint(points[i]);
+        //         }
+        //     }
+        //
+        //     function animate() {
+        //         if(animateHeader) {
+        //             ctx.clearRect(0,0,width,height);
+        //             for(var i in points) {
+        //                 // detect points in range
+        //                 if(Math.abs(getDistance(target, points[i])) < 4000) {
+        //                     points[i].active = 0.3;
+        //                     points[i].circle.active = 0.6;
+        //                 } else if(Math.abs(getDistance(target, points[i])) < 20000) {
+        //                     points[i].active = 0.1;
+        //                     points[i].circle.active = 0.3;
+        //                 } else if(Math.abs(getDistance(target, points[i])) < 40000) {
+        //                     points[i].active = 0.02;
+        //                     points[i].circle.active = 0.1;
+        //                 } else {
+        //                     points[i].active = 0;
+        //                     points[i].circle.active = 0;
+        //                 }
+        //
+        //                 drawLines(points[i]);
+        //                 points[i].circle.draw();
+        //             }
+        //         }
+        //         requestAnimationFrame(animate);
+        //     }
+        //
+        //     function shiftPoint(p) {
+        //         TweenLite.to(p, 1+1*Math.random(), {x:p.originX-50+Math.random()*100,
+        //             y: p.originY-50+Math.random()*100, ease:Circ.easeInOut,
+        //             onComplete: function() {
+        //                 shiftPoint(p);
+        //             }});
+        //     }
+        //
+        //     // Canvas manipulation
+        //     function drawLines(p) {
+        //         if(!p.active) return;
+        //         for(var i in p.closest) {
+        //             ctx.beginPath();
+        //             ctx.moveTo(p.x, p.y);
+        //             ctx.lineTo(p.closest[i].x, p.closest[i].y);
+        //             ctx.strokeStyle = 'rgba(156,217,249,'+ p.active+')';
+        //             ctx.stroke();
+        //         }
+        //     }
+        //
+        //     function Circle(pos,rad,color) {
+        //         var _this = this;
+        //
+        //         // constructor
+        //         (function() {
+        //             _this.pos = pos || null;
+        //             _this.radius = rad || null;
+        //             _this.color = color || null;
+        //         })();
+        //
+        //         this.draw = function() {
+        //             if(!_this.active) return;
+        //             ctx.beginPath();
+        //             ctx.arc(_this.pos.x, _this.pos.y, _this.radius, 0, 2 * Math.PI, false);
+        //             ctx.fillStyle = 'rgba(156,217,249,'+ _this.active+')';
+        //             ctx.fill();
+        //         };
+        //     }
+        //
+        //     // Util
+        //     function getDistance(p1, p2) {
+        //         return Math.pow(p1.x - p2.x, 2) + Math.pow(p1.y - p2.y, 2);
+        //     }
+        //
+        // })();
 
-            var width, height, largeHeader, canvas, ctx, points, target, animateHeader = true;
-
-            // Main
-            initHeader();
-            initAnimation();
-            addListeners();
-
-            function initHeader() {
-                width = window.innerWidth;
-                height = window.innerHeight;
-                target = {x: width/2, y: height/2};
-
-                largeHeader = document.getElementById('large-header');
-                // largeHeader.style.height = height+'px';
-
-                canvas = document.getElementById('demo-canvas');
-                canvas.width = width;
-                canvas.height = height;
-                ctx = canvas.getContext('2d');
-
-                // create points
-                points = [];
-                for(var x = 0; x < width; x = x + width/20) {
-                    for(var y = 0; y < height; y = y + height/20) {
-                        var px = x + Math.random()*width/20;
-                        var py = y + Math.random()*height/20;
-                        var p = {x: px, originX: px, y: py, originY: py };
-                        points.push(p);
-                    }
-                }
-
-                // for each point find the 5 closest points
-                for(var i = 0; i < points.length; i++) {
-                    var closest = [];
-                    var p1 = points[i];
-                    for(var j = 0; j < points.length; j++) {
-                        var p2 = points[j]
-                        if(!(p1 == p2)) {
-                            var placed = false;
-                            for(var k = 0; k < 5; k++) {
-                                if(!placed) {
-                                    if(closest[k] == undefined) {
-                                        closest[k] = p2;
-                                        placed = true;
-                                    }
-                                }
-                            }
-
-                            for(var k = 0; k < 5; k++) {
-                                if(!placed) {
-                                    if(getDistance(p1, p2) < getDistance(p1, closest[k])) {
-                                        closest[k] = p2;
-                                        placed = true;
-                                    }
-                                }
-                            }
-                        }
-                    }
-                    p1.closest = closest;
-                }
-
-                // assign a circle to each point
-                for(var i in points) {
-                    var c = new Circle(points[i], 2+Math.random()*2, 'rgba(255,255,255,0.3)');
-                    points[i].circle = c;
-                }
-            }
-
-            // Event handling
-            function addListeners() {
-                if(!('ontouchstart' in window)) {
-                    window.addEventListener('mousemove', mouseMove);
-                }
-                window.addEventListener('scroll', scrollCheck);
-                window.addEventListener('resize', resize);
-            }
-
-            function mouseMove(e) {
-                var posx = 0;
-                var posy = 0
-                if (e.pageX || e.pageY) {
-                    posx = e.pageX;
-                    posy = e.pageY;
-                }
-                else if (e.clientX || e.clientY)    {
-                    posx = e.clientX + document.body.scrollLeft + document.documentElement.scrollLeft;
-                    posy = e.clientY + document.body.scrollTop + document.documentElement.scrollTop;
-                }
-                target.x = posx;
-                target.y = posy;
-            }
-
-            function scrollCheck() {
-                if(document.body.scrollTop > height) animateHeader = false;
-                else animateHeader = true;
-            }
-
-            function resize() {
-                width = window.innerWidth;
-                height = window.innerHeight;
-                largeHeader.style.height = height+'px';
-                canvas.width = width;
-                canvas.height = height;
-            }
-
-            // animation
-            function initAnimation() {
-                animate();
-                for(var i in points) {
-                    shiftPoint(points[i]);
-                }
-            }
-
-            function animate() {
-                if(animateHeader) {
-                    ctx.clearRect(0,0,width,height);
-                    for(var i in points) {
-                        // detect points in range
-                        if(Math.abs(getDistance(target, points[i])) < 4000) {
-                            points[i].active = 0.3;
-                            points[i].circle.active = 0.6;
-                        } else if(Math.abs(getDistance(target, points[i])) < 20000) {
-                            points[i].active = 0.1;
-                            points[i].circle.active = 0.3;
-                        } else if(Math.abs(getDistance(target, points[i])) < 40000) {
-                            points[i].active = 0.02;
-                            points[i].circle.active = 0.1;
-                        } else {
-                            points[i].active = 0;
-                            points[i].circle.active = 0;
-                        }
-
-                        drawLines(points[i]);
-                        points[i].circle.draw();
-                    }
-                }
-                requestAnimationFrame(animate);
-            }
-
-            function shiftPoint(p) {
-                TweenLite.to(p, 1+1*Math.random(), {x:p.originX-50+Math.random()*100,
-                    y: p.originY-50+Math.random()*100, ease:Circ.easeInOut,
-                    onComplete: function() {
-                        shiftPoint(p);
-                    }});
-            }
-
-            // Canvas manipulation
-            function drawLines(p) {
-                if(!p.active) return;
-                for(var i in p.closest) {
-                    ctx.beginPath();
-                    ctx.moveTo(p.x, p.y);
-                    ctx.lineTo(p.closest[i].x, p.closest[i].y);
-                    ctx.strokeStyle = 'rgba(156,217,249,'+ p.active+')';
-                    ctx.stroke();
-                }
-            }
-
-            function Circle(pos,rad,color) {
-                var _this = this;
-
-                // constructor
-                (function() {
-                    _this.pos = pos || null;
-                    _this.radius = rad || null;
-                    _this.color = color || null;
-                })();
-
-                this.draw = function() {
-                    if(!_this.active) return;
-                    ctx.beginPath();
-                    ctx.arc(_this.pos.x, _this.pos.y, _this.radius, 0, 2 * Math.PI, false);
-                    ctx.fillStyle = 'rgba(156,217,249,'+ _this.active+')';
-                    ctx.fill();
-                };
-            }
-
-            // Util
-            function getDistance(p1, p2) {
-                return Math.pow(p1.x - p2.x, 2) + Math.pow(p1.y - p2.y, 2);
-            }
-
-        })();
-
-        this.socketNum = 0
-
-        //heatMap
-        this.heatMapPoints = toJS(this.props.appStore.heatMapPoints || {});
-        //tracker
-        this.trackIDsArr = toJS(this.props.appStore.trackIDsArr || {})
-
-        console.log(this.heatMapPoints)
-        console.log(this.trackIDsArr)
-
-        // total websocket
-        let url_socket = `${url}/Camera_Web_ws`
-
-        // let _new_coor_func = this.props.new_coor || this._ws_new_coor
-
-        //本机测试 用固定 url
-        console.log('长连接 服务器')
-        // 测试 先关闭 socket
-        this.socket = io(url_socket)
-        this.socket.on('new_coor', this._ws_new_coor)
-        this.socket.on('new_state',this._ws_new_state)
+        // this.socketNum = 0
+        //
+        // //heatMap
+        // this.heatMapPoints = toJS(this.props.appStore.heatMapPoints || {});
+        // //tracker
+        // this.trackIDsArr = toJS(this.props.appStore.trackIDsArr || {})
+        //
+        // console.log(this.heatMapPoints)
+        // console.log(this.trackIDsArr)
+        //
+        // // total websocket
+        // let url_socket = `${url}/Camera_Web_ws`
+        //
+        // // let _new_coor_func = this.props.new_coor || this._ws_new_coor
+        //
+        // //本机测试 用固定 url
+        // console.log('长连接 服务器')
+        // // 测试 先关闭 socket
+        // this.socket = io(url_socket)
+        // this.socket.on('new_coor', this._ws_new_coor)
+        // this.socket.on('new_state',this._ws_new_state)
 
     }
 
     componentWillReceiveProps(nextProps, nextContext) {
-        let _new_coor_func = this.props.new_coor || this._ws_new_coor
+        // let _new_coor_func = this.props.new_coor || this._ws_new_coor
     }
 
     componentWillUnmount() {
         this.timer && clearInterval(this.timer)
-        this.socket.disconnect()
-        this.socket.emit('disconnect')
+        this.socket && this.socket.disconnect()
+        this.socket && this.socket.emit('disconnect')
 
-        this.props.appStore.updateHeatMapPoints(this.heatMapPoints)
-        this.props.appStore.updateTrackIDsArr(this.trackIDsArr)
+        // this.props.appStore.updateHeatMapPoints(this.heatMapPoints)
+        // this.props.appStore.updateTrackIDsArr(this.trackIDsArr)
 
         console.log('clear composite_template socket')
     }
@@ -524,7 +527,8 @@ class Template extends React.Component{
                         top:20*screen_scale_width,
                         //background:`url(${btn_banner}) no-repeat `,
                         backgroundColor:`${btn_banner_color}`,
-                        color:btn_color
+                        color:btn_color,
+                        borderRadius:5,
                     }
                     break;
                 case 4:
@@ -533,7 +537,8 @@ class Template extends React.Component{
                         top:20*screen_scale_width,
                         //background:`url(${btn_banner}) no-repeat `,
                         backgroundColor:`${btn_banner_color}`,
-                        color:btn_color
+                        color:btn_color,
+                        borderRadius:5,
                     }
                     break;
                 default:
@@ -572,7 +577,7 @@ class Template extends React.Component{
                 >
                     <div style={style.navigation_banner}>
                         <span style={{marginLeft:(900-31)*screen_scale_width}}>
-                            鱼眼跟踪
+                            京张演示
                         </span>
                     </div>
                     {navition_btn_component}

@@ -125,7 +125,7 @@ export default class Config extends React.Component {
 
     render() {
         return (
-            <Template classTag={'Config'} current_page={2} history={this.props.history}
+            <Template classTag={'Config'} current_page={3} history={this.props.history}
                       style={{flexDirection:'column', height:1080*screen_scale_height}}
             >
                 <div style={style.wrap} className={'Config_wrap'}>
