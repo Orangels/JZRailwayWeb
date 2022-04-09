@@ -21,7 +21,7 @@
     "marked": "^0.6.2",
     "mobx": "^5.0.3",
     "mobx-react": "^5.2.3",
-    "moment": "^2.24.0",
+    "moment": "^2.29.2",
     "particles.js": "^2.0.0",
     "rc-banner-anim": "^2.4.2",
     "rc-queue-anim": "^1.6.12",
